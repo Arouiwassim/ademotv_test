@@ -1,0 +1,23 @@
+---
+
+  - hosts: all
+    become: yes
+    tasks:
+      - name: create a user named worldy
+        user: 
+          name: worldy
+          password: 0000
+          state: present
+          groups:
+            - sudo
+      - name: installing nginx
+        yum:
+          name: nginx
+          state: latest 
+      - name: create and copy the file
+        copy: 
+          dest: /home/worldy/text.txt
+          content: "{{vari}}"
+    vars:
+      vari: " Hello world !\n"
+
